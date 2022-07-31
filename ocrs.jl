@@ -27,7 +27,7 @@ end
 @NLconstraint(model, yExtra == (1-b)/b*prod(1-b*y[i] for i in 1:n)*(1-exp(-b*(1-sum(y[i] for i in 1:n)))))
 @NLconstraint(model, zExtra == (1-b)/b*prod(1-b*z[i] for i in 1:n)*(1-exp(-b*(1-sum(z[i] for i in 1:n)))))
 @NLconstraint(model, product == (sum(yTerm[i] for i in 1:n)+yExtra)*(sum(zTerm[i] for i in 1:n)+zExtra))
-@NLconstraint(model, obj == 1-3*c+product-sum(yTerm[i]*zTerm[i] for i in 1:n)-b^2*(1-b)^2/n)
+@NLconstraint(model, obj == 1-3*c+product-sum(yTerm[i]*zTerm[i] for i in 1:n)-b^2*(1-b)^2/(n-2))
 
 @objective(model, Min, obj)
 status = optimize!(model)
